@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El Royal Services</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+      body {
+        background: #0b0f19;
+        color: #e5e7eb;
+        line-height: 1.6;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+        border-radius: 12px;
+      }
+
+      /* NAV */
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+      }
+      .navbar {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px;
+      }
+      .logo {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: #38bdf8;
+      }
+      .nav-links {
+        display: flex;
+        gap: 25px;
+        list-style: none;
+      }
+      .nav-links a {
+        color: #e5e7eb;
+        text-decoration: none;
+        position: relative;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background: #38bdf8;
+        left: 0;
+        bottom: -5px;
+        transition: 0.3s;
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+      .menu-toggle {
+        display: none;
+        font-size: 1.8rem;
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 40px;
+        padding: 120px 20px 40px;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .hero-text h1 {
+        font-size: 3rem;
+        font-weight: 700;
+      }
+      .hero-text span {
+        color: #38bdf8;
+      }
+      .hero-text p {
+        margin-top: 10px;
+        color: #94a3b8;
+      }
+      .btn {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 14px 30px;
+        background: #38bdf8;
+        color: #020617;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      .btn:hover {
+        transform: scale(1.05);
+      }
+      .hero-img img {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      /* SECTIONS */
+      section {
+        max-width: 1100px;
+        margin: auto;
+        padding: 80px 20px;
+      }
+      h2 {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+      }
+
+      /* ABOUT */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .skill {
+        background: #1e293b;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+      }
+
+      /* PROJECTS */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+      }
+      .project-card {
+        background: linear-gradient(145deg, #0f172a, #020617);
+        padding: 25px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: 0.3s;
+      }
+      .project-card:hover {
+        transform: translateY(-10px);
+        border-color: #38bdf8;
+      }
+      .project-card img {
+        margin-bottom: 15px;
+      }
+      .project-card h3 {
+        margin-bottom: 10px;
+      }
+      .project-card p {
+        color: #94a3b8;
+      }
+
+      /* SERVICES */
+      .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .service {
+        background: #020617;
+        padding: 20px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .service img {
+        margin-bottom: 15px;
+      }
+
+      /* CONTACT */
+      .contact-box {
+        background: #020617;
+        padding: 30px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      /* FOOTER */
+      footer {
+        text-align: center;
+        padding: 30px;
+        color: #94a3b8;
+      }
+
+      /* MOBILE */
+      @media (max-width: 768px) {
+        .nav-links {
+          position: absolute;
+          top: 60px;
+          right: 0;
+          width: 100%;
+          background: #020617;
+          flex-direction: column;
+          display: none;
+          padding: 20px;
+        }
+        .nav-links.active {
+          display: flex;
+        }
+        .menu-toggle {
+          display: block;
+        }
+        .hero {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-text h1 {
+          font-size: 2.2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">EL ROYAL</div>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle">☰</div>
+      </nav>
+    </header>
+
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <h1>I build <span>premium websites</span></h1>
+        <p>Web Developer & PayPal Consultant helping businesses grow online</p>
+        <a href="#contact" class="btn">Hire Me</a>
+      </div>
+      <div class="hero-img">
+        <img
+          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+          alt="web development"
+        />
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="about-grid">
+        <div>
+          <p>
+            I specialize in creating high-quality, modern websites that are
+            fast, responsive, and visually stunning. I also provide professional
+            PayPal consulting services.
+          </p>
+          <div class="skills">
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">UI/UX</div>
+            <div class="skill">Responsive Design</div>
+            <div class="skill">PayPal Consulting</div>
+          </div>
+        </div>
+        <img src="photo.jpg" alt="photo.jpg" />
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+          />
+          <h3>Modern Portfolio</h3>
+          <p>High-end personal portfolio with animations.</p>
+        </div>
+        <div class="project-card">
+          <img
+            src="https://images.unsplash.com/photo-1559028012-481c04fa702d"
+          />
+          <h3>Business Landing Page</h3>
+          <p>Optimized landing page for conversions.</p>
+        </div>
+        <div class="project-card">
+          <img
+            src="https://images.unsplash.com/photo-1518770660439-4636190af475"
+          />
+          <h3>Web App</h3>
+          <p>Interactive JavaScript application.</p>
+        </div>
+        <div class="project-card">
+          <img
+            src="https://images.unsplash.com/photo-1605902711622-cfb43c4437d1"
+          />
+          <h3>PayPal Services</h3>
+          <img src="paypalservices.jpg" />
+          <p>Secure account creation and management.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2>Services</h2>
+      <div class="services">
+        <div class="service">
+          <img
+            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f"
+          />
+          <h3>Web Development</h3>
+          <p>Modern responsive websites tailored to your needs.</p>
+        </div>
+        <div class="service">
+          <img
+            src="https://images.unsplash.com/photo-1559028012-481c04fa702d"
+          />
+          <h3>UI/UX Design</h3>
+          <p>Clean and professional interface design.</p>
+        </div>
+        <div class="service">
+          <img
+            src="https://images.unsplash.com/photo-1588776814546-ec7e5c9b4b5b"
+          />
+          <h3>PayPal Consulting</h3>
+          <img src="paypal.jpg" />
+          <p>Setup, verification, and account management.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px">
+        <div class="contact-box">
+          <h3>Get in touch</h3>
+
+          <p>
+            <strong>Email:</strong><br />
+            <a
+              href="mailto:nnamdinewman@gmail.com"
+              style="color: #38bdf8; text-decoration: none"
+              >nnamdinewman@gmail.com</a
+            >
+          </p>
+
+          <p>
+            <strong>Phone:</strong><br />
+            <a
+              href="tel:+2349030771894"
+              style="color: #38bdf8; text-decoration: none"
+              >+234 903 077 1894</a
+            >
+          </p>
+
+          <p>
+            <strong>WhatsApp:</strong><br />
+            <a
+              href="https://wa.me/2349030771894"
+              target="_blank"
+              style="color: #38bdf8; text-decoration: none"
+              >Chat on WhatsApp</a 
+              +234 9030771894
+            >
+          </p>
+
+          <p>
+            <strong>LinkedIn:</strong><br />
+            <a
+              href="#"
+              target="_blank"
+              style="color: #38bdf8; text-decoration: none"
+              >Your LinkedIn Profile</a
+            >
+          </p>
+
+          <p>
+            <strong>Instagram:</strong><br />
+            <a
+              href="https://www.instagram.com/elnewman44?igsh=MTVoNHd2aTZ4OTUwNQ=="
+              target="_blank"
+              style="color: #38bdf8; text-decoration: none"
+              >@elnewman44</a
+            >
+          </p>
+        </div>
+        <div class="contact-box">
+          <h3>Send a message</h3>
+          <form>
+            <input
+              type="text"
+              placeholder="Your Name"
+              required
+              style="
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 10px;
+                background: #0f172a;
+                border: none;
+                color: white;
+                border-radius: 8px;
+              "
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              required
+              style="
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 10px;
+                background: #0f172a;
+                border: none;
+                color: white;
+                border-radius: 8px;
+              "
+            />
+            <textarea
+              placeholder="Message"
+              rows="5"
+              required
+              style="
+                width: 100%;
+                padding: 12px;
+                background: #0f172a;
+                border: none;
+                color: white;
+                border-radius: 8px;
+              "
+            ></textarea>
+            <button class="btn" style="width: 100%; margin-top: 10px">
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 El Royal Services</p>
+      <a
+        href="#contact"
+        class="btn"
+        style="margin-top: 15px; display: inline-block"
+      >
+        Contact Me
+      </a>
+    </footer>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+      menuToggle.addEventListener("click", () =>
+        navLinks.classList.toggle("active"),
+      );
+    </script>
+  </body>
+</html>
