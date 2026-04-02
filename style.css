@@ -8,9 +8,10 @@
 body {
   line-height: 1.6;
   background: #f9f9f9;
+  padding-top: 70px; /* prevents navbar overlap */
 }
 
-/* Navbar */
+/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -18,26 +19,44 @@ body {
   background: #111;
   color: #fff;
   padding: 15px 20px;
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .logo {
   font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-}
-
-.nav-links li {
-  margin-left: 20px;
+  gap: 20px;
+  transition: 0.3s ease;
 }
 
 .nav-links a {
   color: #fff;
   text-decoration: none;
+  position: relative;
+}
+
+/* Hover underline */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #00adb5;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
 }
 
 .menu-toggle {
@@ -46,36 +65,62 @@ body {
   cursor: pointer;
 }
 
-/* Hero */
+/* HERO */
 .hero {
   height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: linear-gradient(to right, #00adb5, #007bff); */
-  background-image: url(paypal.jpg);
-  background-repeat: no-repeat;
+  background-image: url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d");
   background-size: cover;
+  background-position: center;
   color: #fff;
   text-align: center;
+  position: relative;
+}
+
+/* Overlay for readability */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero * {
+  position: relative;
 }
 
 .hero span {
-  color: #222;
+  color: #00adb5;
 }
 
+/* BUTTON */
 .btn {
   display: inline-block;
   margin-top: 15px;
-  padding: 10px 20px;
-  background: #111;
+  padding: 12px 25px;
+  background: #00adb5;
   color: #fff;
   text-decoration: none;
+  border-radius: 25px;
+  transition: 0.3s;
 }
 
-/* About */
+.btn:hover {
+  transform: scale(1.05);
+  background: #007bff;
+}
+
+/* SECTIONS */
+section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+/* ABOUT */
 .about {
-  padding: 50px 20px;
   text-align: center;
 }
 
@@ -94,9 +139,8 @@ body {
   border-radius: 5px;
 }
 
-/* Projects */
+/* PROJECTS */
 .projects {
-  padding: 50px 20px;
   background: #eee;
   text-align: center;
 }
@@ -111,22 +155,21 @@ body {
   background: #fff;
   margin: 15px;
   padding: 20px;
-  width: 250px;
+  width: 260px;
   border-radius: 10px;
   transition: 0.3s;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
 }
 
-/* Contact */
+/* CONTACT */
 .contact {
-  padding: 50px 20px;
   text-align: center;
 }
 
-/* Footer */
+/* FOOTER */
 footer {
   background: #111;
   color: #fff;
@@ -134,7 +177,7 @@ footer {
   padding: 15px;
 }
 
-/* Mobile */
+/* MOBILE */
 @media (max-width: 768px) {
   .nav-links {
     position: absolute;
@@ -145,6 +188,7 @@ footer {
     flex-direction: column;
     align-items: center;
     display: none;
+    padding: 20px 0;
   }
 
   .nav-links.active {
@@ -158,5 +202,10 @@ footer {
   .project-container {
     flex-direction: column;
     align-items: center;
+  }
+
+  .hero {
+    height: 80vh;
+    padding: 20px;
   }
 }
